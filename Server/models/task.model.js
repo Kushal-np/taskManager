@@ -1,6 +1,6 @@
 import {v4 as uuidv4} from 'uuid';
 
-let tasks = [];
+let tasks = ["kushal"];
 
 export function getAllTasks(){
     return tasks;

@@ -1,6 +1,6 @@
-import { createTask, deleteTask, updateTask } from "../models/task.model";
+import { createTask, deleteTask, updateTask } from "../models/task.model.js";
 
-export const addtast = async(req , res) =>{
+export const addtask = async(req , res) =>{
     const{title , description , status} = req.body;
     if(!title) {
         return res.status(400).json({
@@ -8,6 +8,9 @@ export const addtast = async(req , res) =>{
         })
     }
     const task = createTask({title , description , status})
+    return res.status(501).json({
+        task
+    })
 }
 
 export const editTask = async(req,res) =>{
