@@ -1,40 +1,26 @@
-import {v4 as uuidv4} from 'uuid';
+import mongoose from 'mongoose'
 
-let tasks = ["kushal"];
 
-export function getAllTasks(){
-    return tasks;
+const taskSchema = new mongoose.Schema({
+    title:{
+        type:String,
+        required:[true,'Title is required'],
+
+    },
+    description:{
+        type:String,
+        default:'',
+    },
+    status:{
+        type:String,
+        enum:['todo','in-progress' , 'done'],
+        default:'todo' , 
+    },
+
 }
+,
+{timestamps:true}
+);
 
-export function createTask({title,description = '' , status='todo'}){
-    const newTask ={
-        id:uuidv4(),
-        title,
-        description,
-        status,
-        createdAt: new Date().toISOString(),
-    };
-    tasks.push(newTask);
-    return newTask;
-}
 
-export function updateTask(id,updates){
-    let found = false , 
-    tasks = tasks.map(t => {
-        if(t.id === id ){
-            found = true;
-            return {
-                ...t , 
-                ...updates
-            }
-        }
-        return t ; 
-    });
-    return found ; 
-}
-
-export function deleteTask(id){
-    const before = tasks.length;
-    tasks = tasks.filter(t=>t.id !== id);
-    return tasks.length < before ;
-}
+export const Task = mongoose.model("Task" , taskSchema);

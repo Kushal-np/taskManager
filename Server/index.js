@@ -4,6 +4,7 @@ import cors from 'cors';
 import taskRoutes from "./routes/task.route.js"
 import { errorHandler } from './utils/errorHanlder.js';
 dotenv.config();
+import connectDB from "./config/db.js"
 const app = express();
 const PORT = process.env.PORT;
 
@@ -21,5 +22,6 @@ app.use("/api/v1/tasks" ,taskRoutes )
 app.use(errorHandler)
 
 app.listen(PORT , () => {
-    console.log("Hello world" , PORT);
+    console.log("Hello world" , PORT);, 
+    connectDB();
 })
