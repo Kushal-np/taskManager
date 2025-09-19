@@ -21,6 +21,11 @@ export const getTasks = async() : Promise<Task[]> =>{
     return res.data;
 }
 
+export const createTask = async(task: Partial<Task>): Promise<Task> =>{
+    const res = await  api.post("/tasks" , task);
+    return res.data;
+}
+
 export const updateTask = async (id: string, updates: Partial<Task>): Promise<Task> => {
   const res = await api.put(`/tasks/${id}`, updates);
   return res.data;
